@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NaganoCake</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  </head>
+  <body>
+  <header class="border-bottom border-secondary mb-5">
+  
+      <nav class="m-5" style="width:90%;">
+        <ul class = "list-unstyled">
+          <% if end_user_signed_in? %>
+          <li class="d-inline"><%= link_to "LOGO", root_path,class: "border border-secondary pl-5 pr-5",style: "font-size:60px" %></li>
+          <li class="d-inline" style="padding-left:200px;padding-right:60px;">ようこそ、<%= current_end_user.last_name+" "+current_end_user.first_name%>さん!</li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "マイページ",end_users_path %></li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "商品一覧",items_path%></li>
+          <li class="d-inline mr-4 btn btn-light">カート</li>
+          <li class="d-inline btn btn-light"><%= link_to "ログアウト",destroy_end_user_session_path,  :method => :delete %></li>
+        <% elsif admin_signed_in? %>
+          <li class="d-inline"><%= link_to "LOGO", admin_path,class: "border border-secondary pl-5 pr-5",style: "font-size:60px"  %></li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "商品一覧",admins_items_path%></li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "会員一覧",admin_end_users_path %></li>
+          <li class="d-inline mr-4 btn btn-light">注文履歴一覧</li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "ジャンル一覧", admins_genre_index_path %></li>
+          <li class="d-inline btn btn-light"><%= link_to "ログアウト", destroy_admin_session_path, :method => :delete %></li>
+        <% else %>
+          <li class="d-inline"><%= link_to "LOGO", root_path,class: "border border-secondary pl-5 pr-5",style: "font-size:60px" %></li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "商品一覧",items_path%></li>
+          <li class="d-inline mr-4 btn btn-light"><%= link_to "新規登録",new_end_user_registration_path %></li>
+          <li class="d-inline btn btn-light"><%= link_to "ログイン",new_end_user_session_path %></li>
+        <% end %>
+        </ul>
+      </nav>
+      
+  </header>
+    <%= yield %>
+    <footer class="border-top border-secondary mt-3">
+      <div class="m-5 p-5"></div>
+    </footer>
+  </body>
+</html>

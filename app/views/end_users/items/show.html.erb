@@ -1,0 +1,15 @@
+<h2>商品詳細</h2>未実装
+<%= attachment_image_tag @item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'200x200', class: "mb-3" %> <br>
+<strong>商品名</strong>    <%#= @item.name %> <br>
+<strong>商品説明</strong>   <%#= @item.description %> <br>
+<strong>ジャンル</strong>   <%#= @item.genre.name %> <br>
+<strong>税込価格(税抜き価格)</strong>   <%#= "¥"+(@item.price*1.1).floor.to_s %><%#= "(¥"+@item.price.to_s+")" %> <br>
+<strong>ステータス</strong>
+
+<% if false %>
+<% if @item.is_active %>
+    <span>販売中</span>
+<% else %>
+    <span>販売停止中</span>
+<% end %> %>
+<% end %>

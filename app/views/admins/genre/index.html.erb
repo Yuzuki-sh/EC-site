@@ -1,0 +1,31 @@
+<div class="ml-5 pl-5">
+<h2>ジャンル一覧・追加</h2>
+<%= form_for @genre, url: admins_genre_index_path, html: {method: 'POST'} do |f| %>
+    <%= render 'layouts/error', model: f.object %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.radio_button :is_active, true %>
+    <%= f.label :is_active, "有効" %>
+    <%= f.radio_button :is_active, false %>
+    <%= f.label :is_active, "無効" %>
+    <%= f.submit "追加",class: "btn  btn-primary" %>
+<% end %>
+<table class="table mt-3" style="width:400px;">
+    <tr class="table-secondary">
+        <th style="width:100px;">ジャンル</th>
+        <th>状態</th>
+        <th></th>
+    </tr>
+    <% @genres.each do |genre| %>
+        <tr>
+            <th><%= genre.name %></th>
+            <% if genre.is_active %>
+                <th>有効</th>
+            <% else %>
+                <th>無効</th>
+            <% end %>
+            <th><%= link_to "編集する", edit_admins_genre_path(genre),class: "btn  btn-primary" %></th>
+        </tr>
+    <% end %>
+</table>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="row">
+		<div class="border border-primary col-3" style="width:300px;height:300px" >
+		<h4>ジャンル検索</h4>
+		<p>未実装</p>
+		</div>
+		<ul class="col-9">
+			<h2 class="mb-3">商品一覧 (全<%= @items.count %>件)</h2>
+			<% @items.each do |item| %>
+				<li class="d-inline-block mr-3">
+					<%= attachment_image_tag item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'200x200' ,class: "mb-3" %>
+					<p>商品名:<%= item.name %></p>
+					<p>¥<%= item.price %></p>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
