@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resource :end_users
   
   get "items" => "end_users/items#index"
-  get "items/:id" => "end_users/items#show"
+  get "items/:id" => "end_users/items#show", as: 'item'
 
 
   get 'admin' => 'admins/homes#top'
@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   namespace :admins, path: :admin do
     resources :genre, :only => [:index, :create, :edit, :update]
     resources :items, :only => [:index, :new, :create, :show, :edit, :update]
+  end
+
+  delete 'end_users/cart_items/destroy_all'
+  namespace :end_users do
+    resources :cart_items, :only => [:index, :update, :destroy, :create]
   end
   # scope module: :admins do
   #   resources :items, :only => [:index, :new, :create, :show, :edit, :update]

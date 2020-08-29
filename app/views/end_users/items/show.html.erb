@@ -1,15 +1,28 @@
-<h2>商品詳細</h2>未実装
-<%= attachment_image_tag @item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'200x200', class: "mb-3" %> <br>
-<strong>商品名</strong>    <%#= @item.name %> <br>
-<strong>商品説明</strong>   <%#= @item.description %> <br>
-<strong>ジャンル</strong>   <%#= @item.genre.name %> <br>
-<strong>税込価格(税抜き価格)</strong>   <%#= "¥"+(@item.price*1.1).floor.to_s %><%#= "(¥"+@item.price.to_s+")" %> <br>
-<strong>ステータス</strong>
+<div class="container">
+    <div class="row">
+        <div class="border border-primary">
+            <h2>ジャンル検索</h2>
+            <p>a</p>
+            <p>b</p>
+            <p>c</p>
+        </div>
+        <div class="col-xs-3 ml-5 pl-5">
+            <%= attachment_image_tag @item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'300x300', class: "mb-3" %> <br>
+        </div>
+        <div class="col-xs-1 pl-5"><span></span></div>
+        <div class="col-xs-8 mt-5">
+            <h2><%= @item.name %></h2>
+            <p><%= @item.description %></p>
+            <p><span style="font-weight:bold;"><%= "¥"+(@item.price*1.1).floor.to_s %></span><span>(税込)</span></p>
 
-<% if false %>
-<% if @item.is_active %>
-    <span>販売中</span>
-<% else %>
-    <span>販売停止中</span>
-<% end %> %>
-<% end %>
+            <%= form_for @cart_item , url: end_users_cart_items_path do |f| %>
+                <%= render 'layouts/error', model: f.object %>
+                <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
+                <%= f.hidden_field :item_id, :value => @item.id %>
+                <%= f.label :amount %>
+                <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10] %>
+                <%= f.submit class:"btn btn-primary" %>
+            <% end %>
+        </div>
+    </div>
+</div>

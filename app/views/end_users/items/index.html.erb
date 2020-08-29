@@ -7,11 +7,13 @@
 		<ul class="col-9">
 			<h2 class="mb-3">商品一覧 (全<%= @items.count %>件)</h2>
 			<% @items.each do |item| %>
+			<%= link_to item_path(item) do %>
 				<li class="d-inline-block mr-3">
 					<%= attachment_image_tag item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'200x200' ,class: "mb-3" %>
 					<p>商品名:<%= item.name %></p>
 					<p>¥<%= item.price %></p>
 				</li>
+			<% end %>
 			<% end %>
 		</ul>
 	</div>

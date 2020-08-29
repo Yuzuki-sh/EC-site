@@ -10,3 +10,32 @@ Admin.create!(
     email: "a@a",
     password: "aaaaaa"
 )
+
+Genre.create(
+    name: "A"
+)
+Genre.create(
+    name: "B"
+)
+Genre.create(
+    name: "C"
+)
+
+Item.create(
+    genre_id: 1,
+    name: "aaa",
+    description: "this is aaa",
+    price: 100
+)
+Item.create(
+    genre_id: 2,
+    name: "bbb",
+    description: "this is bbb",
+    price: 200
+)
+Item.create(
+    genre_id: 3,
+    name: "ccc",
+    description: "this is ccc",
+    price: 300
+)
