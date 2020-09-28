@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   }
   devise_for :end_users, controllers: {   
     registrations: 'end_users/registrations',
-    sessions: 'end_users/sessions' }
+    sessions: 'end_users/sessions' 
+  }
 
   root 'end_users/items#top'
 
@@ -15,18 +16,26 @@ Rails.application.routes.draw do
   resource :end_users
   
   get "items" => "end_users/items#index"
-  get "items/:id" => "end_users/items#show"
-
+  get "items/:id" => "end_users/items#show", as: 'item'
+  post "item_search" => "end_users/items#search"
 
   get 'admin' => 'admins/homes#top'
   get 'admin/end_users' => 'admins/end_users#index'
   namespace :admins, path: :admin do
-    resources :genre, :only => [:index, :create, :edit, :update]
-    resources :items, :only => [:index, :new, :create, :show, :edit, :update]
+    resources :genre,         :only => [:index, :create, :edit, :update]
+    resources :items,         :only => [:index, :new, :create, :show, :edit, :update]
+    resources :orders,        :only => [:index, :show, :update]
+    resources :order_details, :only => [:index, :update]
   end
-  # scope module: :admins do
-  #   resources :items, :only => [:index, :new, :create, :show, :edit, :update]
-  # end
-  # resources :admins
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  delete 'end_users/cart_items/destroy_all'
+  post 'end_users/orders/confirm'
+  get 'end_users/orders/complete' => 'end_users/orders#complete'
+  namespace :end_users do
+    resources :cart_items,    :only => [:index, :update, :destroy, :create]
+    resources :orders,        :only => [:index, :show, :new, :create]
+    resources :addresses,     :except => [:show, :new]
+    resources :order_details, :only => [:index, :show]
+    resources :genres,        :only => [:show]
+  end
 end

@@ -1,0 +1,44 @@
+<div style="width:80%;margin:0 auto;">
+    <h2 class="ml-5 pl-5 d-inline">注文詳細</h2>
+    <table class="mt-3 table">
+        <tr class="table-secondary">
+            <th>商品画像</th>
+            <th>商品名</th>
+            <th>税込価格</th>
+            <th>個数</th>
+            <th>ステータス</th>
+            <th></th>
+        </tr>
+        <% @order_details.each do |order_detail| %>
+            <tr>
+                <td><%= attachment_image_tag order_detail.item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'50x50' %></td>
+                <td><%= order_detail.item.name %></td>
+                <td><%= order_detail.price_include_tax %></td>
+                <td><%= order_detail.amount %></td>
+                <td>
+                    <% case order_detail.work_status %>
+                        <% when 0 %>
+                            <p>制作準備中</p>
+                        <% when 1 %>
+                            <p>制作中</p>
+                        <% when 2 %>
+                            <p>制作済み</p>
+                        <% else %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= form_with model: order_detail,url: admins_order_detail_path(order_detail) do |f| %>
+                        <%# enum work_status: { preparing_production: 0, production: 1, produced: 2 } %>
+                        <%= f.radio_button :work_status, :preparing_production %> 
+                        <%= f.label :preparing_production %><br>
+                        <%= f.radio_button :work_status, :production %> 
+                        <%= f.label :production %><br>
+                        <%= f.radio_button :work_status, :produced %>
+                        <%= f.label :produced %><br>
+                        <%= f.submit "変更" ,class:"btn btn-secondary"%>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</div>
