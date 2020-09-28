@@ -31,7 +31,7 @@
                 <%= f.label :amount %>
                 <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],{selected: cart_item.amount} %>
                 <%= f.submit "変更",class:"btn btn-primary" %>
-            <% end %>
+                <% end %>
             </td> 
             <td>
                 <%= cart_item.item.price * cart_item.amount %>
@@ -46,7 +46,7 @@
     <% end %>
 <% end %>
 </table>　<br>
-<%= link_to "買い物を続ける",root_path, class:"btn btn-primary d-inline ml-5",style:"margin-right:700px;" %>
+<%= link_to "買い物を続ける", items_path, class:"btn btn-primary d-inline ml-5",style:"margin-right:700px;" %>
 <table class="table d-inline">
     <tr style="margin-left:300px;">
         <th class="table-secondary">合計金額</th>　
@@ -54,4 +54,11 @@
     </tr>
 </table>
 <br>
-<%= link_to "情報入力に進む",root_path, class:"btn btn-success",style:"margin-left:500px;" %>
+<% if @cart_items.empty? %>
+    <div class="btn" style="margin-left:350px;">
+        <p>カート商品を登録せず、情報入力できません</p>
+        <button style="text-decoration: line-through;" class="btn-success btn">情報入力へ進む</button>
+    </div>
+<% else %>
+    <%= link_to "情報入力に進む",new_end_users_order_path, class:"btn btn-success",style:"margin-left:500px;" %>
+<% end %>

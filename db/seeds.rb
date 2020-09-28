@@ -10,32 +10,23 @@ Admin.create!(
     email: "a@a",
     password: "aaaaaa"
 )
-
-Genre.create(
-    name: "A"
+EndUser.create!(
+    email: "a@a",
+    last_name: "田中",
+    first_name: "太郎",
+    last_name_kana: "タナカ",
+    first_name_kana: "タロウ",
+    postal_code: "1234567",
+    address: "住所が入ります",
+    telephone_number: "12345678910",
+    password: "aaaaaa"
 )
 Genre.create(
-    name: "B"
+    name: "カテゴリーA"
 )
 Genre.create(
-    name: "C"
+    name: "カテゴリーB"
 )
-
-Item.create(
-    genre_id: 1,
-    name: "aaa",
-    description: "this is aaa",
-    price: 100
-)
-Item.create(
-    genre_id: 2,
-    name: "bbb",
-    description: "this is bbb",
-    price: 200
-)
-Item.create(
-    genre_id: 3,
-    name: "ccc",
-    description: "this is ccc",
-    price: 300
+Genre.create(
+    name: "カテゴリーC"
 )

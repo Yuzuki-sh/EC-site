@@ -1,2 +1,22 @@
-<h1>top.html.erb</h1>
-<p>end_users/items#top</p>
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h3 class="font-weight-bold">データ設計</h3>
+            <%=  image_tag "er.png", height: '540', width: '800', alt: "Edit Entry", class: "mb-5" %>
+            <h3 class="font-weight-bold">実装機能</h3><br>
+            <ul>
+                <li>EndUserは会員登録、ログイン・ログアウト、退会ができます.</li>
+                <li>EndUserのログインはメールアドレスとパスワードで行えます.</li>
+                <li>EndUserがログインしている状態かどうか、ページのヘッダーにユーザ名を表示するなどして判断できます.</li>
+                <li>商品をカートに入れ、1度に複数種類、複数商品の購入ができます。また、カート内の商品は個数変更・削除ができます.</li>
+                <li>EndUserはマイページからユーザ情報の閲覧・編集、注文履歴の閲覧、配送先の閲覧・編集ができます.</li>
+                <li>管理者用メールアドレスとパスワードでログインできます.</li>
+                <li>商品の管理が行えます.</li>
+                <li>ユーザの注文履歴が一覧できます.</li>
+            </ul>
+            <h3 class="font-weight-bold" style="width:200px;margin: 0 auto;"><%= link_to "Click Here!", new_end_user_session_path %></h3>
+            <div class="col-2"></div>
+        </div>
+    </div>
+</div>

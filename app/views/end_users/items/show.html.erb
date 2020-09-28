@@ -1,10 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="border border-primary">
-            <h2>ジャンル検索</h2>
-            <p>a</p>
-            <p>b</p>
-            <p>c</p>
+            			<%= render 'end_users/genres/link', genres: @genres %>
         </div>
         <div class="col-xs-3 ml-5 pl-5">
             <%= attachment_image_tag @item, :image, :fill, 180, 130, fallback: "noimage.jpg", size:'300x300', class: "mb-3" %> <br>

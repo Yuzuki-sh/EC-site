@@ -1,10 +1,13 @@
 <div class="container">
 	<div class="row">
-		<div class="border border-primary col-3" style="width:300px;height:300px" >
-		<h4>ジャンル検索</h4>
-		<p>未実装</p>
+		<div class="col-3" style="width:300px;height:300px" >
+			<%= render 'end_users/genres/link', genres: @genres %>
 		</div>
 		<ul class="col-9">
+			<%= form_with url: items_path, method: :get, local: true do |f| %>
+				<%= f.text_field :name %>
+				<%= f.submit "検索" %>
+			<% end %>
 			<h2 class="mb-3">商品一覧 (全<%= @items.count %>件)</h2>
 			<% @items.each do |item| %>
 			<%= link_to item_path(item) do %>

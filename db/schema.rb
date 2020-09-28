@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_06_123831) do
+ActiveRecord::Schema.define(version: 2020_09_15_005942) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.string "postal_code", null: false
+    t.string "address", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -66,6 +75,30 @@ ActiveRecord::Schema.define(version: 2020_08_06_123831) do
     t.string "image_id"
     t.boolean "is_active", default: true, null: false
     t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "order_id"
+    t.integer "price_include_tax"
+    t.integer "amount"
+    t.integer "work_status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_order_details_on_item_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "end_user_id", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
+    t.string "delivery_name", null: false
+    t.integer "postage", null: false
+    t.integer "total_fee", null: false
+    t.integer "payment", default: 0, null: false
+    t.integer "orders_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

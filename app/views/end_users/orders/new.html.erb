@@ -1,0 +1,24 @@
+<%= form_for @order,url: end_users_orders_path  do |f| %>
+    <%= render 'layouts/error', model: f.object %>
+    <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
+    <%= f.label :payment, "支払い方法" %>
+    <%= f.radio_button :payment, :cash, checked: "checked" %>
+    <%= f.label "現金" %>
+    <%= f.radio_button :payment, :credit %>
+    <%= f.label "クレジットカード" %> <br>
+    <%= f.label :address, "お届け先" %> <br>
+    <%= f.radio_button :address_option, 0, checked: "checked" %>ご自身の住所 <br>
+        <%= current_end_user.address %> <br>
+    <%= f.radio_button :address_option, 1 %> 
+        <%= f.label :address_id, '登録済み住所から選択' %><br>
+        <%= f.select :address_id, current_end_user.addresses.map{|a| [a.address,a.id]}, 
+        {prompt: "選択してください"} %> <br>
+    <%= f.radio_button :address_option, 2 %>新規住所 <br>
+        <%= f.label :postcode,"郵便番号" %> <br>
+        <%= f.text_field :postcode %> <br>
+        <%= f.label :address, "住所"%> <br>
+        <%= f.text_field :address %> <br>
+        <%= f.label :delivery_name,"宛名" %><br>
+        <%= f.text_field :delivery_name %> <br>
+    <%= f.submit "確認画面へ進む",class:"btn btn-primary" %>
+<% end %>

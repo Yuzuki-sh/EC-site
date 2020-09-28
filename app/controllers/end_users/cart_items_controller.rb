@@ -1,10 +1,11 @@
 class EndUsers::CartItemsController < ApplicationController
+    before_action :authenticate_end_user!
     def index 
         @cart_items = CartItem.all
     end
     def create 
         cart_item = CartItem.new(cart_item_params)
-        duplication_cart_item = CartItem.where(end_user_id: cart_item.end_user_id,item_id: cart_item.item_id).first
+        duplication_cart_item = CartItem.find_by(end_user_id: cart_item.end_user_id,item_id: cart_item.item_id)
         if duplication_cart_item.nil?
             if cart_item.save
                 redirect_to end_users_cart_items_path #カートの一覧画面

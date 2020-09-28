@@ -1,17 +1,18 @@
-<div style="margin-left:150px">
+<div style="width:80%;margin:0 auto;">
     <h2 class="ml-5 pl-5 d-inline">商品紹介</h2>
     <div class="d-inline" style="margin-left: 600px;">
         <%= link_to(new_admins_item_path) do %>
         <i class="far fa-plus-square fa-2x"></i>
         <% end %>
     </div>
-    <table class="mt-3 table" style="margin:0;margin-left:100px;width:800px;">
+    <table class="mt-3 table">
         <tr class="table-secondary">
             <th style="width:80px">商品ID</th>
             <th style="width:250px">商品名</th>
             <th style="width:100px">税抜価格</th>
             <th style="width:250px">ジャンル</th>
             <th>ステータス</th>
+            <th></th>
         </tr>
         <% @items.each do |item| %>
             <tr>
@@ -24,6 +25,7 @@
                 <% else %>
                     <td>販売停止中</td>
                 <% end %>
+                <td><%= link_to "編集", edit_admins_item_path(item), class: "btn btn-primary" %></td>
             </tr>
         <% end %>
     </table>
