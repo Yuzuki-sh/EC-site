@@ -1,0 +1,10 @@
+<h3>配送先の編集</h3>
+<%= form_for @address, url: end_users_address_path do |f| %>
+  <%= f.label :postal_code, "郵便番号(ハイフンなし)" %> <br>
+  <%= f.text_field :postal_code %> <br>
+  <%= f.label :address, "住所" %> <br>
+  <%= f.text_field :address %> <br>
+  <%= f.label :name, "宛名" %> <br>
+  <%= f.text_field :name %> <br>
+  <%= f.submit "編集する" %>
+<% end %>

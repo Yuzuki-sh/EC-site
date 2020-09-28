@@ -1,0 +1,64 @@
+<h3 class="pl-5 d-inline">ショッピングカート</h3>
+<%= link_to "カートを空にする",end_users_cart_items_destroy_all_path, :method => :delete, data: {confirm: "カートを空にしますか？"}, class:"btn btn-danger d-inline", style:"margin-left:600px;" %>
+<table class="table mt-3 ml-5 pl-5" style="width:80%; margin:0 auto">
+<tr>
+    <th class="table-secondary" style="width:100px;">商品名</th>
+    <th class="table-secondary"></th>
+    <th class="table-secondary">単価(税込)</th>
+    <th class="table-secondary">数量</th>
+    <th class="table-secondary">小計</th>
+    <th class="table-secondary"></th>
+    <th class="table-secondary"></th>
+</tr>
+<% sum = 0 %>
+<% @cart_items.each do |cart_item| %>
+    <% if cart_item.end_user_id == current_end_user.id %>
+        <tr>
+            <th>
+                <%= attachment_image_tag cart_item.item, :image, format: 'jpeg', fallback: "noimage.jpg", size: "100x100" %>
+            </th>
+            <td>
+                <%= cart_item.item.name %>
+            </td>
+            <td>
+                <%= cart_item.item.price %>
+            </td>
+            <td>
+                <%= form_for cart_item , url: end_users_cart_item_path(cart_item.item.id) do |f| %>
+                <%= render 'layouts/error', model: f.object %>
+                <%= f.hidden_field :end_user_id, :value => current_end_user.id %>
+                <%= f.hidden_field :item_id, :value => cart_item.item.id %>
+                <%= f.label :amount %>
+                <%= f.select :amount,[1,2,3,4,5,6,7,8,9,10],{selected: cart_item.amount} %>
+                <%= f.submit "変更",class:"btn btn-primary" %>
+                <% end %>
+            </td> 
+            <td>
+                <%= cart_item.item.price * cart_item.amount %>
+            </td> 
+            <td>
+                <% sum += cart_item.item.price * cart_item.amount %>
+            </td>   
+            <td>
+                <%= link_to "削除する",end_users_cart_item_path(cart_item.id), :method => :delete,class:"btn btn-danger" %>
+            </td>
+        </tr>
+    <% end %>
+<% end %>
+</table>　<br>
+<%= link_to "買い物を続ける", items_path, class:"btn btn-primary d-inline ml-5",style:"margin-right:700px;" %>
+<table class="table d-inline">
+    <tr style="margin-left:300px;">
+        <th class="table-secondary">合計金額</th>　
+        <td><%= sum %></td>
+    </tr>
+</table>
+<br>
+<% if @cart_items.empty? %>
+    <div class="btn" style="margin-left:350px;">
+        <p>カート商品を登録せず、情報入力できません</p>
+        <button style="text-decoration: line-through;" class="btn-success btn">情報入力へ進む</button>
+    </div>
+<% else %>
+    <%= link_to "情報入力に進む",new_end_users_order_path, class:"btn btn-success",style:"margin-left:500px;" %>
+<% end %>
